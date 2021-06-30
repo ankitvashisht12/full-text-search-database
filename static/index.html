@@ -1,0 +1,27 @@
+<!Doctype>
+<html>
+    <head>
+        <title>Full Text Search : MongoDB </title>
+    </head>
+    <body>
+        <input id="search-input" type="text" />
+        <button id="search-btn">Search</button>
+        <pre>
+        <code id="show">
+        </code>
+        </pre>
+        <script>
+            const btn = document.getElementById("search-btn");
+            const input = document.getElementById("search-input");
+            const show = document.getElementById("show");
+
+            btn.addEventListener('click', async () => {
+                show.innerText = 'loading..';
+                const res = await fetch('/get?search=' + encodeURIComponent(input.value));
+                const json = await res.json();
+                console.log("RESULT =>", json)
+                show.innerText = '\n'+ JSON.stringify(json, null, 4);
+            })
+        </script>
+    </body>
+</html>
